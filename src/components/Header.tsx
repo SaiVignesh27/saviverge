@@ -133,7 +133,7 @@ const Header = () => {
                 className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gold-600 transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>{PHONE}</span>
+                <span>Call</span>
               </a>
               <Link
                 to="/contact"
