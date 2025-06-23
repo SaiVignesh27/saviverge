@@ -1,6 +1,9 @@
 import React from 'react';
 import { MessageSquare, FileText, CreditCard, Palette, Code, Rocket, CheckCircle, ArrowRight } from 'lucide-react';
 
+const PHONE = import.meta.env.VITE_PUBLIC_PHONE;
+const EMAIL = import.meta.env.VITE_PUBLIC_EMAIL;
+
 const HowItWorks = () => {
   const steps = [
     {
@@ -237,7 +240,7 @@ const HowItWorks = () => {
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
             </a>
             <a 
-              href="https://wa.me/918688959653"
+              href={`https://wa.me/${PHONE}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white/20 transition-colors duration-300 flex items-center justify-center border border-white/20"

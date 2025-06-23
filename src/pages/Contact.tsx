@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { Mail, Phone, MessageCircle, Clock, Send } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
-emailjs.init('Kj2FSqKHPdJputSkk');
+const PHONE = import.meta.env.VITE_PUBLIC_PHONE;
+const EMAIL = import.meta.env.VITE_PUBLIC_EMAIL;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE_ID;
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +36,7 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await emailjs.send('service_yy16ir6', 'template_64dh1c8', {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         name: formData.name,
         brandName: formData.brandName || 'N/A',
         email: formData.email,
@@ -101,8 +107,8 @@ const Contact = () => {
                 <Phone className="w-8 h-8 text-gold-600" />
               </div>
               <h3 className="text-xl font-semibold text-primary-800 mb-2">Phone</h3>
-              <a href="tel:+918688959653" className="text-gray-600 hover:text-gold-600 transition-colors duration-200">
-                +91 86889 59653
+              <a href={`tel:${PHONE}`} className="text-gray-600 hover:text-gold-600 transition-colors duration-200">
+                {PHONE}
               </a>
             </div>
 
@@ -111,8 +117,8 @@ const Contact = () => {
                 <Mail className="w-8 h-8 text-gold-600" />
               </div>
               <h3 className="text-xl font-semibold text-primary-800 mb-2">Email</h3>
-              <a href="mailto:saivigneshkadiri@gmail.com" className="text-gray-600 hover:text-gold-600 transition-colors duration-200">
-                saivigneshkadiri@gmail.com
+              <a href={`mailto:${EMAIL}`} className="text-gray-600 hover:text-gold-600 transition-colors duration-200">
+                {EMAIL}
               </a>
             </div>
 
@@ -122,7 +128,7 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-semibold text-primary-800 mb-2">WhatsApp</h3>
               <a 
-                href="https://wa.me/918688959653" 
+                href={`https://wa.me/${PHONE.replace(/\s+/g, '')}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gold-600 transition-colors duration-200"
@@ -285,7 +291,7 @@ const Contact = () => {
               <p className="text-gray-600 mb-4">Or get in touch directly:</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="https://wa.me/918688959653"
+                  href={`https://wa.me/${PHONE.replace(/\s+/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-green-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
@@ -294,7 +300,7 @@ const Contact = () => {
                   WhatsApp Chat
                 </a>
                 <a
-                  href="mailto:saivigneshkadiri@gmail.com"
+                  href={`mailto:${EMAIL}`}
                   className="bg-primary-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-900 transition-colors duration-300 flex items-center justify-center"
                 >
                   <Mail className="mr-2 w-5 h-5" />

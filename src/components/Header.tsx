@@ -18,6 +18,9 @@ const Header = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  const PHONE = import.meta.env.VITE_PUBLIC_PHONE;
+  const EMAIL = import.meta.env.VITE_PUBLIC_EMAIL;
+
   return (
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,11 +57,11 @@ const Header = () => {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-3">
             <a
-              href="tel:+918688959653"
+              href={`tel:${PHONE}`}
               className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gold-600 transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
-              <span>Call</span>
+              <span>{PHONE}</span>
             </a>
             <Link
               to="/contact"
@@ -98,11 +101,11 @@ const Header = () => {
             ))}
             <div className="pt-2 border-t border-gray-100">
               <a
-                href="tel:+918688959653"
+                href={`tel:${PHONE}`}
                 className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600"
               >
                 <Phone className="w-4 h-4" />
-                <span>+91 86889 59653</span>
+                <span>{PHONE}</span>
               </a>
               <Link
                 to="/contact"

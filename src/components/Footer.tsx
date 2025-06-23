@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail, Phone, MessageCircle, MapPin } from 'lucide-react';
 
+const PHONE = import.meta.env.VITE_PUBLIC_PHONE;
+const EMAIL = import.meta.env.VITE_PUBLIC_EMAIL;
+
 const Footer = () => {
   return (
     <footer className="bg-primary-800 text-white">
@@ -31,18 +34,19 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-gold-500" />
-                <a href="tel:+918688959653" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  +91 86889 59653
+                <a href={`tel:${PHONE}`} className="text-gray-300 hover:text-white transition-colors duration-200">
+                  {PHONE}
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <MessageCircle className="w-5 h-5 text-gold-500" />
-                <a 
-                  href="https://wa.me/918688959653" 
-                  target="_blank" 
+                <a
+                  href={`https://wa.me/${PHONE.replace(/\s+/g, '')}`}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                  className="bg-green-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
                 >
+                  <MessageCircle className="mr-2 w-5 h-5" />
                   WhatsApp Chat
                 </a>
               </div>

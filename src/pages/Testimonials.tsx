@@ -3,7 +3,12 @@ import { Star, Quote, ChevronLeft, ChevronRight, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 
-emailjs.init('Kj2FSqKHPdJputSkk');
+const EMAIL = import.meta.env.VITE_PUBLIC_EMAIL;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TESTIMONIAL_TEMPLATE_ID;
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const Testimonials = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -88,7 +93,7 @@ const Testimonials = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await emailjs.send('service_yy16ir6', 'template_69qw9k6', {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         name: formData.name,
         email: formData.email,
         company: formData.company || 'N/A',

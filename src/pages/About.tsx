@@ -34,6 +34,9 @@ const About = () => {
     }
   ];
 
+  const PHONE = import.meta.env.VITE_PUBLIC_PHONE;
+  const EMAIL = import.meta.env.VITE_PUBLIC_EMAIL;
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -51,7 +54,7 @@ const About = () => {
             <h2 className="text-3xl font-bold text-primary-800 mb-6">Our Story</h2>
             <div className="space-y-4 text-gray-700 text-md">
               <p>
-                SAVI Verge started from a simple goal — to help college students build meaningful final-year projects that weren’t just functional but portfolio-worthy. What began as a one-person effort during my engineering days quickly evolved into a full-fledged agency.
+                SAVI Verge started from a simple goal — to help college students build meaningful final-year projects that weren't just functional but portfolio-worthy. What began as a one-person effort during my engineering days quickly evolved into a full-fledged agency.
               </p>
               <p>
                 After delivering multiple successful academic projects — from dashboards and LMS systems to mini-apps and landing pages — I realized the need for reliable and well-designed digital services for real-world businesses. I transitioned from college projects to building live websites and platforms for startups, freelancers, and local brands.
@@ -158,16 +161,16 @@ const About = () => {
                   </p>
                   <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a 
-                      href="mailto:saivigneshkadiri@gmail.com"
+                      href={`mailto:${EMAIL}`}
                       className="text-primary-600 hover:text-primary-800 font-medium transition-colors duration-200"
                     >
-                      saivigneshkadiri@gmail.com
+                      {EMAIL}
                     </a>
                     <a 
-                      href="tel:+918688959653"
+                      href={`tel:${PHONE}`}
                       className="text-primary-600 hover:text-primary-800 font-medium transition-colors duration-200"
                     >
-                      +91 86889 59653
+                      {PHONE}
                     </a>
                   </div>
                 </div>
