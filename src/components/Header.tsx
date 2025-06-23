@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, Phone } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +29,6 @@ const Header = () => {
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-10 h-10 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
               <span className="text-white font-bold text-s">SAVI</span>
-              {/* <ArrowUpRight className="w-3 h-3 text-white ml-0.5 mt-0.5" /> */}
             </div>
             <div>
               <h1 className="text-xl font-bold text-primary-800">SAVI Verge</h1>
@@ -71,7 +70,7 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
@@ -86,42 +85,63 @@ const Header = () => {
         <>
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
+            className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
-          {/* Mobile Menu */}
-          <div className="md:hidden bg-white border-t border-gray-100 fixed top-16 left-0 right-0 z-50">
-            <div className="px-4 py-2 space-y-1">
+
+          {/* Slide-in Drawer */}
+          <div className="fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-50 transform transition-transform duration-300 animate-slide-in">
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-gold-500 to-gold-600 rounded flex items-center justify-center text-white font-bold text-xs">
+                  SAVI
+                </div>
+                <h2 className="text-lg font-semibold text-primary-800">SAVI Verge</h2>
+              </div>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-gold-600"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Nav Links */}
+            <nav className="px-4 py-4 space-y-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
+                  className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-200 ${
                     isActive(item.href)
-                      ? 'text-gold-600 bg-gold-50'
-                      : 'text-gray-700 hover:text-gold-600 hover:bg-gray-50'
+                      ? 'text-gold-600 bg-gold-100'
+                      : 'text-gray-700 hover:text-gold-600 hover:bg-gray-100'
                   }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-2 border-t border-gray-100">
-                <a
-                  href={`tel:${PHONE}`}
-                  className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>{PHONE}</span>
-                </a>
-                <Link
-                  to="/contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block bg-gold-500 text-white px-3 py-2 rounded-lg text-center font-medium mx-3 mt-2"
-                >
-                  Get Quote
-                </Link>
-              </div>
+            </nav>
+
+            {/* Contact + CTA */}
+            <div className="px-4 pt-4 pb-6 border-t border-gray-100">
+              <a
+                href={`tel:${PHONE}`}
+                className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gold-600 transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                <span>{PHONE}</span>
+              </a>
+              <Link
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="block bg-gold-500 text-white px-4 py-2 mt-4 rounded-lg text-center font-medium hover:bg-gold-600 transition"
+              >
+                Get Quote
+              </Link>
             </div>
           </div>
         </>
