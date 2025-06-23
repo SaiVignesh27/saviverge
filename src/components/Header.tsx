@@ -83,49 +83,64 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-50 flex md:hidden">
-          {/* Overlay */}
-          <div
-            className="flex-1 bg-black bg-opacity-30"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          {/* Mobile Menu */}
-          <div className="bg-white border-t border-gray-100 w-4/5 max-w-xs h-full shadow-lg animate-slideInRight">
-            <div className="px-4 py-2 space-y-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
-                    isActive(item.href)
-                      ? 'text-gold-600 bg-gold-50'
-                      : 'text-gray-700 hover:text-gold-600 hover:bg-gray-50'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-2 border-t border-gray-100">
-                <a
-                  href={`tel:${PHONE}`}
-                  className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>{PHONE}</span>
-                </a>
-                <Link
-                  to="/contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block bg-gold-500 text-white px-3 py-2 rounded-lg text-center font-medium mx-3 mt-2"
-                >
-                  Get Quote
-                </Link>
-              </div>
-            </div>
+  <>
+    {/* Overlay */}
+    <div
+      className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity duration-300"
+      onClick={() => setIsMenuOpen(false)}
+    />
+
+    {/* Slide-in Mobile Menu */}
+    <div className="md:hidden fixed top-0 left-0 bottom-0 w-72 bg-white shadow-lg z-50 animate-slide-in">
+      <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gradient-to-br from-gold-500 to-gold-600 rounded flex items-center justify-center text-white font-bold text-xs">
+            SAVI
           </div>
+          <h2 className="text-lg font-semibold text-primary-800">SAVI Verge</h2>
         </div>
-      )}
+        <button onClick={() => setIsMenuOpen(false)}>
+          <X className="w-6 h-6 text-gray-700" />
+        </button>
+      </div>
+
+      <nav className="px-4 py-2 space-y-2">
+        {navigation.map((item) => (
+          <Link
+            key={item.name}
+            to={item.href}
+            onClick={() => setIsMenuOpen(false)}
+            className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-200 ${
+              isActive(item.href)
+                ? 'text-gold-600 bg-gold-100'
+                : 'text-gray-700 hover:text-gold-600 hover:bg-gray-100'
+            }`}
+          >
+            {item.name}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="px-4 pt-3 pb-6 border-t border-gray-100">
+        <a
+          href={`tel:${PHONE}`}
+          className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gold-600 transition-colors"
+        >
+          <Phone className="w-4 h-4" />
+          <span>{PHONE}</span>
+        </a>
+        <Link
+          to="/contact"
+          onClick={() => setIsMenuOpen(false)}
+          className="block bg-gold-500 text-white px-4 py-2 mt-3 rounded-lg text-center font-medium hover:bg-gold-600 transition"
+        >
+          Get Quote
+        </Link>
+      </div>
+    </div>
+  </>
+)}
+
     </header>
   );
 };
