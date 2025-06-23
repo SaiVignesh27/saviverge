@@ -83,40 +83,48 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100">
-          <div className="px-4 py-2 space-y-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
-                  isActive(item.href)
-                    ? 'text-gold-600 bg-gold-50'
-                    : 'text-gray-700 hover:text-gold-600 hover:bg-gray-50'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-2 border-t border-gray-100">
-              <a
-                href={`tel:${PHONE}`}
-                className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600"
-              >
-                <Phone className="w-4 h-4" />
-                <span>{PHONE}</span>
-              </a>
-              <Link
-                to="/contact"
-                onClick={() => setIsMenuOpen(false)}
-                className="block bg-gold-500 text-white px-3 py-2 rounded-lg text-center font-medium mx-3 mt-2"
-              >
-                Get Quote
-              </Link>
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          {/* Mobile Menu */}
+          <div className="md:hidden bg-white border-t border-gray-100 fixed top-16 left-0 right-0 z-50">
+            <div className="px-4 py-2 space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
+                    isActive(item.href)
+                      ? 'text-gold-600 bg-gold-50'
+                      : 'text-gray-700 hover:text-gold-600 hover:bg-gray-50'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="pt-2 border-t border-gray-100">
+                <a
+                  href={`tel:${PHONE}`}
+                  className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>{PHONE}</span>
+                </a>
+                <Link
+                  to="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block bg-gold-500 text-white px-3 py-2 rounded-lg text-center font-medium mx-3 mt-2"
+                >
+                  Get Quote
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );
