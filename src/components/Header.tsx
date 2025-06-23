@@ -83,14 +83,14 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <>
+        <div className="fixed inset-0 z-50 flex md:hidden">
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
+            className="flex-1 bg-black bg-opacity-30"
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Mobile Menu */}
-          <div className="md:hidden bg-white border-t border-gray-100 fixed top-16 left-0 right-0 z-50">
+          <div className="bg-white border-t border-gray-100 w-4/5 max-w-xs h-full shadow-lg animate-slideInRight">
             <div className="px-4 py-2 space-y-1">
               {navigation.map((item) => (
                 <Link
@@ -124,7 +124,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </header>
   );
