@@ -13,9 +13,8 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-                <ArrowUpRight className="w-3 h-3 text-white ml-0.5 mt-0.5" />
+              <div className="w-10 h-10 bg-gradient-to-br from-gold-500 to-gold-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
+                <span className="text-white font-bold text-s">SAVI</span>
               </div>
               <div>
                 <h3 className="text-xl font-bold">SAVI Verge</h3>
@@ -35,7 +34,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-gold-500" />
                 <a href={`tel:${PHONE}`} className="text-gray-300 hover:text-white transition-colors duration-200">
-                  {PHONE}
+                  Phone
                 </a>
               </div>
               <div className="flex items-center space-x-3">
@@ -44,9 +43,8 @@ const Footer = () => {
                   href={`https://wa.me/${PHONE.replace(/\s+/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
+                  className="text-gray-300 hover:text-white transition-colors duration-200"
                 >
-                  <MessageCircle className="mr-2 w-5 h-5" />
                   WhatsApp Chat
                 </a>
               </div>
