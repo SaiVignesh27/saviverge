@@ -20,6 +20,7 @@ const Testimonials = () => {
     testimonial: ''
   });
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState<{ open: boolean; message: string; type: 'success' | 'error' }>({ open: false, message: '', type: 'success' });
 
   const testimonials = [
     {
@@ -100,11 +101,11 @@ const Testimonials = () => {
         rating: formData.rating,
         testimonial: formData.testimonial
       });
-      alert('🎉 Thank you! Your testimonial has been submitted successfully.');
+      setModal({ open: true, message: '🎉 Thank you! Your testimonial has been submitted successfully.', type: 'success' });
       setFormData({ name: '', email: '', company: '', rating: 5, testimonial: '' });
     } catch (error) {
       console.error('Email sending failed:', error);
-      alert('❌ Something went wrong. Please try again or contact us directly.');
+      setModal({ open: true, message: '❌ Something went wrong. Please try again or contact us directly.', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -306,14 +307,43 @@ const Testimonials = () => {
 
             <button
               type="submit"
-              className="w-full bg-gold-500 text-white py-4 rounded-lg text-lg font-semibold hover:bg-gold-600 transition-colors duration-300 flex items-center justify-center"
+              className="w-full bg-gold-500 text-white py-4 rounded-lg text-lg font-semibold hover:bg-gold-600 transition-colors duration-300 flex items-center justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              <Send className="mr-2 w-5 h-5" />
-              Submit Testimonial
+              {loading ? (
+                <>
+                  <svg className="animate-spin mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 w-5 h-5" />
+                  Submit Testimonial
+                </>
+              )}
             </button>
           </form>
         </div>
       </section>
+
+      {/* Modal Popup */}
+      {modal.open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className={`bg-white rounded-2xl shadow-xl px-8 py-8 max-w-sm w-full text-center ${modal.type === 'success' ? 'border-green-400' : 'border-red-400'} border-2`}>
+            <div className="mb-4 text-3xl">{modal.type === 'success' ? '✅' : '❌'}</div>
+            <div className="text-lg font-semibold mb-4 text-gray-800">{modal.message}</div>
+            <button
+              onClick={() => setModal({ ...modal, open: false })}
+              className={`mt-2 px-6 py-2 rounded-lg font-medium text-white ${modal.type === 'success' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'} transition`}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
